@@ -1,0 +1,16 @@
+name: Security scan
+on:
+  pull_request:
+  push:
+    branches: [$default-branch]
+  # New advisories appear without code changes.
+  schedule:
+    - cron: "0 7 * * MON"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    uses: ianchov/security-scan/.github/workflows/scan.yml@v1

@@ -1,0 +1,6 @@
+{
+  "name": "Pinned security scan",
+  "description": "Run sha256-verified gitleaks, opengrep, osv-scanner and trivy config on pull requests, pushes and weekly.",
+  "iconName": "octicon shield",
+  "categories": ["Security"]
+}

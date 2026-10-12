@@ -1,0 +1,35 @@
+name: Security scan (reusable)
+# Called from a pull_request, push or schedule workflow. The scan logic lives in
+# ianchov/security-scan-action.
+on:
+  workflow_call:
+    inputs:
+      runs-on:
+        description: >-
+          Runner labels as JSON, for example '"ubuntu-24.04"' or '["self-hosted","linux"]'.
+          Fork pull requests always run on ubuntu-24.04, because a self-hosted runner keeps state.
+        type: string
+        default: '"ubuntu-24.04"'
+      rule-packs:
+        description: opengrep-rules directories, space or newline separated. Empty uses the Python set.
+        type: string
+        default: ""
+      exclude:
+        description: Extra paths for opengrep and trivy to skip, one per line.
+        type: string
+        default: ""
+
+jobs:
+  scanners:
+    runs-on: >-
+      ${{ github.event_name == 'pull_request'
+      && github.event.pull_request.head.repo.full_name != github.repository
+      && 'ubuntu-24.04' || fromJSON(inputs.runs-on) }}
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: ianchov/security-scan-action@v1
+        with:
+          rule-packs: ${{ inputs.rule-packs }}
+          exclude: ${{ inputs.exclude }}
