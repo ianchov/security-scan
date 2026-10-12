@@ -15,7 +15,7 @@ on:
         type: string
         default: ""
       exclude:
-        description: Extra paths for opengrep and trivy to skip, one per line.
+        description: Extra paths for opengrep, bandit, osv-scanner and trivy to skip, one per line.
         type: string
         default: ""
 

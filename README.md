@@ -1,6 +1,6 @@
 # security-scan
 
-Workflows that run sha256-verified gitleaks, opengrep, osv-scanner and trivy config on a
+Workflows that run sha256-verified gitleaks, opengrep, bandit, osv-scanner and trivy config on a
 repository. The scan logic, versions and defaults live in the action
 [ianchov/security-scan-action](https://github.com/ianchov/security-scan-action).
 
@@ -49,7 +49,7 @@ Optional inputs, set under `with:`:
 |---|---|---|
 | `runs-on` | `'"ubuntu-24.04"'` | Runner labels as JSON, for example `'["self-hosted","linux"]'`. Fork pull requests always run on `ubuntu-24.04`, because a self-hosted runner keeps state between jobs. |
 | `rule-packs` | Python set | opengrep-rules directories, space or newline separated. |
-| `exclude` | empty | Extra paths for opengrep and trivy to skip, one per line. |
+| `exclude` | empty | Extra paths for opengrep, bandit, osv-scanner and trivy to skip, one per line. |
 
 Example for a Django repository on a self-hosted runner:
 
